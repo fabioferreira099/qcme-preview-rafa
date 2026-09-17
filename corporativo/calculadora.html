@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'">
+<!-- Google Tag Manager (first-party via Stape) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://stape.exc.rio.br/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TSBK852L');</script>
+<!-- End Google Tag Manager -->
+<!-- PostHog (org Exc Rio) -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.uploadQueue.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_CtLFsAUhpCEdjsZA3PAZwb8MufuHeofZwrdCjBi2dQ3b', {
+    api_host: 'https://us.i.posthog.com',
+    person_profiles: 'identified_only',
+    capture_pageview: true,
+    capture_pageleave: true,
+    enable_heatmaps: true,
+    session_recording: { maskAllInputs: true, maskTextSelector: 'input[type="email"], input[type="tel"], input[name="email"], input[name="whatsapp"]' },
+  });
+</script>
+<!-- End PostHog -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora · Quanto Custa Meu Evento Corporativo</title>
+<meta name="description" content="Monte o orçamento do seu evento corporativo com faixas de preço reais: escolha o padrão de cada categoria e veja o custo estimado na hora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/qcme.css">
+
+<!-- PostHog · analytics (Projeto Exc) -->
+</head>
+<body>
+<div style="position:fixed;z-index:9999;left:50%;bottom:14px;transform:translateX(-50%);padding:7px 13px;border-radius:999px;background:#171717;color:#fff;font:500 11px/1.2 Arial,sans-serif;letter-spacing:.04em;box-shadow:0 4px 18px #0003">PREVIEW · dados não enviados</div>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://stape.exc.rio.br/ns.html?id=GTM-TSBK852L"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="logo-type">Quanto custa<br>meu evento?</span><span class="logo-beta">beta</span></a>
+  <div class="nav-links">
+    <a href="#" data-contato class="nav-cta">Falar com um especialista</a>
+  </div>
+</nav>
+
+<div class="tool-wrap">
+  <h1 class="tool-title">Vamos descobrir <em>juntos.</em></h1>
+  <p class="tool-sub">Faixas calibradas com orçamentos reais de eventos realizados e estudo de mercado (jul/2026). A calculadora é um auxílio de planejamento: valores podem variar conforme data, formato e negociação.</p>
+
+  <!-- PASSO 1: TIPO -->
+  <section class="tool-step active" id="step-tipo">
+    <h2 class="tool-question">Que evento você está planejando?</h2>
+    <div class="tool-options" id="tipo-options"></div>
+  </section>
+
+  <!-- PASSO 2: CONVIDADOS -->
+  <section class="tool-step" id="step-convidados">
+    <h2 class="tool-question">Quantas pessoas no evento?</h2>
+    <div class="big-value"><span id="conv-display">150</span><small>participantes</small></div>
+    <input type="range" class="tool-range" id="conv-range" min="20" max="1000" step="10" value="150">
+    <div class="range-limits"><span>20</span><span>1.000</span></div>
+    <div class="tool-nav">
+      <button class="btn-verde" data-next="step-padrao">Continuar</button>
+      <button class="tool-back" data-back="step-tipo">← Voltar</button>
+    </div>
+  </section>
+
+  <!-- PASSO 3: PADRÃO (TIER) -->
+  <section class="tool-step" id="step-padrao">
+    <h2 class="tool-question">Que padrão de fornecedores combina com o seu evento?</h2>
+    <div class="tool-options tier-options" id="padrao-options"></div>
+    <div class="tool-nav">
+      <button class="tool-back" data-back="step-convidados">← Voltar</button>
+    </div>
+  </section>
+
+  <!-- PASSO 4: ORÇAMENTO -->
+  <section class="tool-step" id="step-orcamento">
+    <h2 class="tool-question">Qual a verba para o evento completo?</h2>
+    <div class="big-value"><span id="orc-display">R$ 80 mil</span><small>tudo incluído: espaço, buffet, cenografia, atrações, som e imagem, foto e produção</small></div>
+    <input type="range" class="tool-range" id="orc-range" min="20000" max="2000000" step="5000" value="80000">
+    <div class="range-limits"><span>R$ 20 mil</span><span>R$ 2 mi</span></div>
+    <div class="tool-nav">
+      <button class="btn-verde" id="btn-result">Continuar</button>
+      <button class="tool-back" data-back="step-padrao">← Voltar</button>
+    </div>
+  </section>
+
+  <!-- PASSO 5: CAPTURA ANTES DO RESULTADO -->
+  <section class="tool-step" id="step-captura">
+    <div class="result-gate-card">
+      <span class="result-gate-kicker">Seu plano está pronto</span>
+      <h2 class="tool-question">Para acessar o resultado completo</h2>
+      <p>Preencha seus dados para ver a estimativa detalhada e baixar o plano para aprovação.</p>
+      <form class="result-gate-form" id="result-gate-form">
+        <input type="text" name="nome" placeholder="Seu nome" autocomplete="name" required>
+        <input type="email" name="email" placeholder="Seu e-mail corporativo" autocomplete="email" required>
+        <input type="tel" name="whatsapp" placeholder="WhatsApp com DDD" autocomplete="tel" inputmode="tel" required>
+        <input type="hidden" name="data_evento"><input type="hidden" name="espaco_reservado">
+        <p class="result-gate-error" id="result-gate-error" role="alert"></p>
+        <button type="submit" class="btn-verde">Ver meu resultado</button>
+      </form>
+      <button class="tool-back" data-back="step-orcamento">← Voltar</button>
+      <small>Seus dados serão usados para liberar o plano, e a Exc poderá entrar em contato sobre o seu evento.</small>
+    </div>
+  </section>
+
+  <!-- PASSO 6: RESULTADO -->
+  <section class="tool-step" id="step-resultado">
+    <div class="evento-card" id="evento-card">
+      <div class="ev-field"><label for="ev-conv">Participantes</label><input type="number" id="ev-conv" min="20" max="1000" step="10"></div>
+      <div class="ev-field"><label for="ev-orc">Verba (R$)</label><input type="number" id="ev-orc" min="20000" max="2000000" step="5000"></div>
+      <p class="ev-hint">Edite qualquer resposta: o plano recalcula na hora.</p>
+    </div>
+    <div class="painel-sticky" id="painel">
+      <div class="painel-nums">
+        <div class="painel-num"><span class="painel-label">Seu plano</span><span class="painel-valor" id="total-display"></span></div>
+        <div class="painel-num"><span class="painel-label">Sua verba</span><span class="painel-valor painel-orc" id="painel-orc"></span></div>
+        <span class="painel-badge" id="painel-badge"></span>
+        <button class="painel-view" id="painel-view" type="button" aria-label="Alternar entre barra e gráfico de rosca" title="Alternar visualização"></button>
+      </div>
+      <div class="painel-comp" id="painel-comp" aria-hidden="true"></div>
+      <div class="painel-donut-wrap" id="painel-donut-wrap" aria-hidden="true">
+        <svg id="painel-donut" viewBox="0 0 140 140" width="140" height="140"></svg>
+        <span class="painel-donut-center" id="painel-donut-center"></span>
+      </div>
+      <div class="painel-legend" id="painel-legend"></div>
+      <p class="painel-delta" id="painel-delta"></p>
+      <p class="painel-meta"><span id="per-guest"></span> por participante · <span id="result-padrao"></span></p>
+    </div>
+    <div class="result-single">
+      <div>
+        <div class="alloc-rows" id="alloc-rows"></div>
+        <p class="alloc-hint">Deslize para escolher o nível de cada categoria. O trilho mostra as faixas reais de mercado, do Essencial ao Super Premium. Toque em "detalhes" para atalhos de faixa e o que entra em cada categoria.</p>
+        <div id="venue-box"></div>
+
+        <div class="email-gate">
+          <h3 class="serif">Leve o plano para aprovação</h3>
+          <p>Baixe a distribuição detalhada por categoria, pronta para anexar no pedido de verba.</p>
+          <button type="button" class="btn-verde" id="btn-download-plan">Baixar plano</button>
+        </div>
+
+        <div class="tool-nav" style="margin-top:36px">
+          <button class="tool-back" id="btn-refazer">← Refazer do início</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- fim resultado -->
+</div>
+
+<footer>
+  <span class="foot-logo"><a href="index.html" class="foot-logo"><span class="logo-type">Quanto custa<br>meu evento?</span></a></span>
+  <span class="foot-links"><a href="#" data-contato>Falar com um especialista</a></span>
+  <span class="foot-selo">desenvolvido por <img src="assets/logo-exc.svg" alt="Exc"></span>
+  <span class="foot-copy">© 2026 Quanto Custa Meu Evento · Rio de Janeiro</span>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/exc-logo.js"></script>
+<script>
+/* ============================================================
+   PLANEJADOR DE ORÇAMENTO
+   Calibração: 27 propostas reais (Modo Ágil) + estudo de
+   benchmark — jul/2026. Fonte: Banco de Orçamentos (pasta
+   Calculadora de Eventos). Recalibrar conforme o banco cresce.
+   ============================================================ */
+
+/* PADRÕES (TIERS) — cortes de R$/convidado nos percentis reais
+   P50 = 790 · P80 = 1030 (n = 27 propostas) */
+const TIERS = [
+  { key: 'essencial',    nome: 'Essencial',     pp: [430, 1050],
+    desc: 'Tudo o que o evento precisa, pelo melhor preço. Fornecedores que entregam bem, sem excessos.' },
+  { key: 'premium',      nome: 'Premium',       pp: [1050, 1900],
+    desc: 'Alto padrão, personalização e portfólio reconhecido por grandes marcas.' },
+  { key: 'superpremium', nome: 'Super Premium', pp: [1900, 3800],
+    desc: 'O topo do mercado: experiência exclusiva e assinada.' },
+];
+
+/* cuts: R$/convidado, 4 cortes que definem as 3 faixas do trilho
+   [min, P50, P80, teto]. Teto = 2x o P80. Calibrados: espaco, buffet, decoracao, som
+   (13 propostas itemizadas). estimado:true = faixa provisória até o
+   banco ter amostra — recalibrar. */
+const CATS = [
+  { key: 'espaco', nome: 'Espaço e localização', cor: '#14532D', cuts: [118, 222, 416, 830],
+    itens: ['Locação do espaço', 'Taxas de montagem e desmontagem', 'Estacionamento e valet', 'Energia de backup (gerador)'] },
+  { key: 'buffet', nome: 'Buffet e bebidas', cor: '#1F7A44', cuts: [173, 307, 330, 660],
+    itens: ['Coffee break e almoço', 'Coquetel, jantar ou finger food', 'Bebidas e bar', 'Equipe de salão e cozinha'] },
+  { key: 'decoracao', nome: 'Cenografia e ambientação', cor: '#2FA35C', cuts: [87, 203, 370, 740],
+    itens: ['Conceito e ambientação', 'Cenografia de palco e backdrop', 'Mobiliário e layout do salão', 'Sinalização e marca no espaço', 'Planta de montagem'] },
+  { key: 'atracao', nome: 'Atrações e entretenimento', cor: '#46D07F', cuts: [10, 40, 120, 500], estimado: true,
+    itens: ['DJ e pista', 'Banda ou artista convidado', 'Mestre de cerimônias ou apresentador', 'Palestrante e ativações para o público'] },
+  { key: 'fotovideo', nome: 'Foto e vídeo', cor: '#6FDD9B', cuts: [15, 45, 90, 180], estimado: true,
+    itens: ['Fotógrafo', 'Videomaker e aftermovie', 'Cobertura para redes sociais', 'Banco de imagens e entregas finais'] },
+  { key: 'som', nome: 'Som, luz e imagem', cor: '#98E7B7', cuts: [28, 64, 138, 280],
+    itens: ['Som: PA, caixas e microfonia', 'Iluminação cênica e de ambiente', 'Painéis de LED e projeção', 'Transmissão e live streaming', 'Equipe técnica de operação'] },
+  { key: 'assessoria', nome: 'Produção e coordenação', cor: '#BFF0D3', cuts: [20, 60, 140, 280], estimado: true,
+    itens: ['Produção executiva e planejamento', 'Coordenação no dia do evento', 'Gestão de fornecedores', 'Roteiro e script de palco'] },
+  { key: 'extra', nome: 'Materiais e logística', cor: '#DDF7E8', cuts: [8, 20, 45, 90], estimado: true,
+    itens: ['Convites, credenciamento e recepção', 'Brindes e materiais impressos', 'Transporte e hospedagem de participantes'] },
+];
+
+const TIPOS = ['Confraternização', 'Convenção ou congresso', 'Lançamento de produto', 'Premiação ou gala', 'Treinamento ou workshop', 'Ativação de marca'];
+
+/* Cores do trilho de faixas (Essencial → Super Premium) */
+const BAND_COLORS = ['#EDEDEA', '#A8A8A1', '#2B2B28'];
+
+const RESERVA_PADRAO = 0.10;  // contingência mínima recomendada nos guias Exc
+const COR_RESERVA = '#CFE5D8';
+
+/* ---------- ESTADO ---------- */
+/* pp = R$/convidado escolhido em cada categoria (o ponto no trilho) */
+const S = { tipo: null, padrao: null, convidados: 150, orcamento: 80000, reserva: RESERVA_PADRAO, pp: {}, alloc: {} };
+
+const tierOf = c => { const v = S.pp[c.key]; for (let i = 2; i >= 1; i--) if (v >= c.cuts[i]) return i; return 0; };
+const presetFromPadrao = () => {
+  const t = TIERS.findIndex(x => x.key === S.padrao.key);
+  CATS.forEach(c => { S.pp[c.key] = Math.round((c.cuts[t] + c.cuts[t + 1]) / 2); });
+};
+/* Trilho: 4 bandas de largura igual (0-400); mapeia posição <-> R$/convidado */
+const ppToSlider = (c, v) => {
+  if (v >= c.cuts[3]) return 300;
+  for (let b = 2; b >= 0; b--) if (v >= c.cuts[b])
+    return Math.round(b * 100 + (v - c.cuts[b]) / (c.cuts[b + 1] - c.cuts[b]) * 100);
+  return 0;
+};
+const sliderToPp = (c, s) => {
+  s = Math.max(0, Math.min(300, s));
+  const b = Math.min(2, Math.floor(s / 100));
+  return Math.round(c.cuts[b] + (s - b * 100) / 100 * (c.cuts[b + 1] - c.cuts[b]));
+};
+/* valor digitado pode passar do teto do slider: Super Premium é aberto */
+const noTopo = c => S.pp[c.key] >= c.cuts[3];
+const subtotal = () => CATS.reduce((a, c) => a + S.pp[c.key] * S.convidados, 0);
+const planoTotal = () => Math.round(subtotal() * (1 + S.reserva));
+// Quantas vezes a pessoa chegou num resultado, somando visitas. Sinal de interesse pro comercial.
+// localStorage pode lançar exceção (aba anônima, bloqueio de site data).
+function contaCalculo() {
+  try { const n = (+localStorage.getItem('qcme_calculos') || 0) + 1; localStorage.setItem('qcme_calculos', String(n)); } catch (e) {}
+}
+function vezesCalculou() {
+  try { return +localStorage.getItem('qcme_calculos') || 0; } catch (e) { return 0; }
+}
+const faixaTotais = t => [
+  Math.round(CATS.reduce((a, c) => a + c.cuts[t], 0) * S.convidados * (1 + RESERVA_PADRAO)),
+  Math.round(CATS.reduce((a, c) => a + c.cuts[t + 1], 0) * S.convidados * (1 + RESERVA_PADRAO)),
+];
+
+const fmt = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+const fmtK = v => v >= 1000000 ? 'R$ ' + (v/1000000).toLocaleString('pt-BR', {maximumFractionDigits:1}) + ' mi'
+                               : 'R$ ' + Math.round(v/1000) + ' mil';
+
+/* ---------- NAVEGAÇÃO ---------- */
+function goTo(id) {
+  document.querySelectorAll('.tool-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => goTo(b.dataset.next)));
+document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => goTo(b.dataset.back)));
+
+/* ---------- PASSO 1: TIPO ---------- */
+const tipoWrap = document.getElementById('tipo-options');
+TIPOS.forEach(t => {
+  const b = document.createElement('button');
+  b.className = 'tool-option'; b.textContent = t;
+  b.addEventListener('click', () => {
+    S.tipo = t;
+    tipoWrap.querySelectorAll('.tool-option').forEach(o => o.classList.remove('selected'));
+    b.classList.add('selected');
+    track('budget_tool_start', { tipo: t });
+    setTimeout(() => goTo('step-convidados'), 180);
+  });
+  tipoWrap.appendChild(b);
+});
+
+/* ---------- PASSO 3: PADRÃO (TIER) ---------- */
+const padraoWrap = document.getElementById('padrao-options');
+function renderPadroes() {
+  padraoWrap.innerHTML = '';
+  TIERS.forEach((t, i) => {
+    const fx = faixaTotais(i);
+    const b = document.createElement('button');
+    b.className = 'tool-option tier-option' + (S.padrao && S.padrao.key === t.key ? ' selected' : '');
+    b.innerHTML = '<span class="tier-name">' + t.nome + '</span>' +
+      '<span class="tier-desc">' + t.desc + '</span>' +
+      '<span class="tier-faixa">Para ' + S.convidados.toLocaleString('pt-BR') + ' participantes: ' +
+      fmtK(fx[0]) + ' a ' + fmtK(fx[1]) + '</span>';
+    b.addEventListener('click', () => {
+      S.padrao = t;
+      padraoWrap.querySelectorAll('.tool-option').forEach(o => o.classList.remove('selected'));
+      b.classList.add('selected');
+      track('budget_tier_set', { tipo: S.tipo, padrao: t.key });
+      presetFromPadrao();
+      suggestOrcamento();
+      setTimeout(() => goTo('step-orcamento'), 180);
+    });
+    padraoWrap.appendChild(b);
+  });
+}
+renderPadroes();
+document.querySelector('[data-next="step-padrao"]').addEventListener('click', renderPadroes);
+
+/* Sugere orçamento inicial coerente com o preset escolhido */
+function suggestOrcamento() {
+  if (!S.padrao) return;
+  const t = TIERS.findIndex(x => x.key === S.padrao.key);
+  const fx = faixaTotais(t);
+  const mid = Math.round(planoTotal() / 5000) * 5000;
+  S.orcamento = Math.max(+orcRange.min, Math.min(+orcRange.max, mid));
+  orcRange.value = S.orcamento;
+  document.getElementById('orc-display').textContent = fmtK(S.orcamento);
+}
+
+/* ---------- PASSOS 2 e 4: SLIDERS ---------- */
+const convRange = document.getElementById('conv-range');
+convRange.addEventListener('input', () => {
+  S.convidados = +convRange.value;
+  document.getElementById('conv-display').textContent = S.convidados.toLocaleString('pt-BR');
+});
+const orcRange = document.getElementById('orc-range');
+orcRange.addEventListener('input', () => {
+  S.orcamento = +orcRange.value;
+  document.getElementById('orc-display').textContent = fmtK(S.orcamento);
+});
+function showUnlockedResult() {
+  renderResult();
+  track('budget_result', { tipo: S.tipo, convidados: S.convidados, orcamento: S.orcamento });
+  contaCalculo();
+  goTo('step-resultado');
+  window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'calc_result_view', versao:'corporativo'}); if(window.posthog)posthog.capture('calc_result_view');
+}
+document.getElementById('btn-result').addEventListener('click', () => {
+  if (!S.padrao) { S.padrao = TIERS[0]; presetFromPadrao(); }
+  track('budget_set', { tipo: S.tipo, padrao: S.padrao.key, convidados: S.convidados, orcamento: S.orcamento });
+  computeAlloc();
+  if (sessionStorage.getItem('qcme_result_unlocked') === '1') showUnlockedResult();
+  else goTo('step-captura');
+});
+
+/* ---------- ALOCAÇÃO: o valor absoluto de cada categoria emerge do ponto escolhido no trilho ---------- */
+function computeAlloc() {
+  CATS.forEach(c => { S.alloc[c.key] = S.pp[c.key] * S.convidados; });
+}
+
+/* ---------- RESULTADO (dashboard) ---------- */
+const presetIdx = () => S.padrao ? TIERS.findIndex(x => x.key === S.padrao.key) : 1;
+
+function renderRows() {
+  const wrap = document.getElementById('alloc-rows');
+  wrap.innerHTML = '';
+  CATS.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'alloc-row';
+    row.dataset.cat = c.key;
+    const bands = [0, 1, 2].map(i =>
+      '<span style="flex:1;background:' + BAND_COLORS[i] + '"></span>').join('');
+    row.innerHTML =
+      '<div class="alloc-head">' +
+      '<span class="alloc-name"><span class="alloc-swatch" style="background:' + c.cor + '"></span>' + c.nome +
+      '<span class="flag-badge" data-flag hidden>acima do padrão</span>' +
+      '<button class="alloc-toggle" aria-expanded="false" aria-label="Detalhes de ' + c.nome + '">detalhes</button></span>' +
+      '<span class="alloc-value"></span>' +
+      '</div>' +
+      '<div class="band-wrap">' +
+      '<div class="band-track" aria-hidden="true">' + bands + '</div>' +
+      '<input type="range" class="tool-range" style="position:absolute;top:-7px;left:0;width:100%;margin:0;background:transparent" ' +
+      'min="0" max="300" step="1" value="' + ppToSlider(c, S.pp[c.key]) + '" aria-label="Nível de ' + c.nome + '">' +
+      '</div>' +
+      '<div class="alloc-detail">' +
+      '<div class="tier-chips" role="group" aria-label="Padrão de ' + c.nome + '">' +
+      TIERS.map((t, i) => '<button class="tier-chip" data-t="' + i + '">' + t.nome + '</button>').join('') +
+      '</div>' +
+      '<p class="alloc-faixa" data-faixa></p>' +
+      '<ul>' + c.itens.map(i => '<li>' + i + '</li>').join('') + '</ul>' +
+      (c.estimado ? '<p class="estimado-tag">Faixa em calibração: será refinada conforme o banco de orçamentos reais cresce.</p>' : '') +
+      '</div>';
+    const input = row.querySelector('input');
+    input.addEventListener('input', () => {
+      S.pp[c.key] = sliderToPp(c, +input.value);
+      updateCard(row, c);
+      updateTotals();
+    });
+    input.addEventListener('change', () =>
+      track('budget_adjust', { categoria: c.key, pp: S.pp[c.key], tier: TIERS[tierOf(c)].key }));
+    row.querySelectorAll('.tier-chip').forEach(chip => chip.addEventListener('click', () => {
+      const i = +chip.dataset.t;
+      S.pp[c.key] = Math.round((c.cuts[i] + c.cuts[i + 1]) / 2);
+      input.value = ppToSlider(c, S.pp[c.key]);
+      track('budget_tier_cat', { categoria: c.key, tier: TIERS[i].key });
+      updateCard(row, c);
+      updateTotals();
+    }));
+    row.querySelector('.alloc-toggle').addEventListener('click', e => {
+      const open = row.classList.toggle('open');
+      e.target.setAttribute('aria-expanded', open);
+      if (open) track('budget_detail_open', { categoria: c.key });
+    });
+    wrap.appendChild(row);
+    updateCard(row, c);
+  });
+
+  // Linha da reserva de contingência
+  const rr = document.createElement('div');
+  rr.className = 'alloc-row reserva-row';
+  rr.innerHTML =
+    '<div class="alloc-head">' +
+    '<span class="alloc-name"><span class="alloc-swatch" style="background:' + COR_RESERVA + '"></span>Reserva de contingência' +
+    '<button class="alloc-toggle" aria-expanded="false" aria-label="Por que reservar">por quê?</button></span>' +
+    '<span class="alloc-value" id="reserva-value">' + fmt(subtotal() * S.reserva) + '<small>' + Math.round(S.reserva * 100) + '%</small></span>' +
+    '</div>' +
+    '<input type="range" class="tool-range" min="0" max="20" step="1" value="' + Math.round(S.reserva * 100) + '" aria-label="Reserva de contingência (%)">' +
+    '<div class="alloc-detail"><p class="alloc-faixa">Recomendamos reservar ao menos 10% para imprevistos: mudança de escopo, aumento de público, ajuste de última hora.</p></div>';
+  rr.querySelector('input').addEventListener('input', e => {
+    S.reserva = Math.max(0, Math.min(0.2, +e.target.value / 100));
+    updateTotals();
+  });
+  rr.querySelector('input').addEventListener('change', () =>
+    track('budget_adjust', { categoria: 'reserva', valor: Math.round(S.reserva * 100) }));
+  rr.querySelector('.alloc-toggle').addEventListener('click', e => {
+    const open = rr.classList.toggle('open');
+    e.target.setAttribute('aria-expanded', open);
+  });
+  wrap.appendChild(rr);
+}
+
+/* Atualiza uma linha: valor, nome da faixa, chips, referência e selo de upgrade */
+function updateCard(row, c) {
+  const t = tierOf(c);
+  S.alloc[c.key] = S.pp[c.key] * S.convidados;
+  row.querySelector('.alloc-value').innerHTML = fmt(S.alloc[c.key]) +
+    '<small>' + TIERS[t].nome + (noTopo(c) ? '+' : '') + ' · ' + fmt(S.pp[c.key]) + '/pess.</small>';
+  row.querySelectorAll('.tier-chip').forEach((chip, i) => chip.classList.toggle('on', i === t));
+  const fx = row.querySelector('[data-faixa]');
+  if (fx) fx.textContent = t === 2
+    ? 'Super Premium não tem teto: nos eventos reais parte de ' + fmt(c.cuts[2]) +
+      ' por participante e vai até onde o projeto pedir.'
+    : 'Nos eventos reais, ' + c.nome + ' na faixa ' + TIERS[t].nome +
+      ' fica entre ' + fmt(c.cuts[t]) + ' e ' + fmt(c.cuts[t + 1]) + ' por participante.';
+}
+
+/* Selos "acima do padrão": só quando o plano estoura o orçamento */
+function updateFlags() {
+  const estourou = planoTotal() > S.orcamento * 1.02;
+  const pi = presetIdx();
+  CATS.forEach(c => {
+    const row = document.querySelector('.alloc-row[data-cat="' + c.key + '"]');
+    if (!row) return;
+    const on = estourou && tierOf(c) > pi;
+    row.classList.toggle('flagged', on);
+    const badge = row.querySelector('[data-flag]');
+    if (badge) badge.hidden = !on;
+  });
+}
+
+/* Painel sticky: números, selo, barra de composição e leitura do encaixe */
+function renderPainel() {
+  const T = planoTotal(), O = S.orcamento;
+  document.getElementById('total-display').textContent = fmtK(T);
+  document.getElementById('painel-orc').textContent = fmtK(O);
+  document.getElementById('per-guest').textContent = fmt(T / S.convidados);
+  document.getElementById('result-padrao').textContent = padraoLabel();
+
+  const comp = document.getElementById('painel-comp');
+  let segs = CATS.map(c =>
+    '<div data-seg="' + c.key + '" style="flex:' + S.alloc[c.key] + ';background:' + c.cor + '" title="' + c.nome + '"></div>');
+  segs.push('<div data-seg="__reserva__" style="flex:' + Math.round(subtotal() * S.reserva) + ';background:' + COR_RESERVA + '" title="Reserva"></div>');
+  if (T < O) segs.push('<div style="flex:' + (O - T) + ';background:transparent"></div>');
+  comp.innerHTML = segs.join('');
+  renderLegend();
+  if (viewDonut) renderDonut();
+
+  const badge = document.getElementById('painel-badge');
+  const delta = document.getElementById('painel-delta');
+  const pi = presetIdx();
+  const upgrades = CATS.filter(c => tierOf(c) > pi).map(c => c.nome);
+  if (T > O * 1.02) {
+    badge.textContent = 'acima da verba';
+    badge.className = 'painel-badge warn';
+    delta.innerHTML = '<strong>' + fmtK(T - O) + ' acima.</strong> ' +
+      (upgrades.length
+        ? 'As linhas marcadas (' + upgrades.join(', ') + ') são onde você subiu do padrão ' + S.padrao.nome + '. As alavancas mais diretas.'
+        : 'Deslize alguma categoria para uma faixa mais essencial, ajuste o número de participantes, ou fale com a nossa equipe sobre datas flexíveis.');
+  } else if (T < O * 0.85) {
+    badge.textContent = 'sobra fôlego';
+    badge.className = 'painel-badge folga';
+    delta.textContent = 'Sobram ' + fmtK(O - T) + ' da sua verba. Dá para subir de faixa onde mais importa, ou guardar como margem de negociação.';
+  } else {
+    badge.textContent = 'dentro da verba';
+    badge.className = 'painel-badge ok';
+    delta.textContent = 'Plano e verba alinhados, dentro do que vemos em eventos corporativos bem resolvidos desse porte.';
+  }
+  updateFlags();
+}
+
+function padraoLabel() {
+  if (!S.padrao) return '';
+  const ts = CATS.map(c => tierOf(c));
+  return ts.every(t => t === ts[0])
+    ? 'padrão ' + TIERS[ts[0]].nome
+    : 'padrão personalizado (base ' + S.padrao.nome + ')';
+}
+
+/* ---------- DONUT (visualização alternativa do painel) ---------- */
+let viewDonut = false;
+const ICON_PIE = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.2"/><path d="M8 1.8V8l4.4 4.4"/></svg>';
+const ICON_BAR = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 13.5h12M4.5 13.5V7m3.5 6.5V3m3.5 10.5V9"/></svg>';
+const pvBtn = document.getElementById('painel-view');
+function renderDonut() {
+  const svg = document.getElementById('painel-donut');
+  const T = planoTotal();
+  if (!svg || !T) return;
+  const R = 50, C = 2 * Math.PI * R;
+  let off = 0, parts = '';
+  const segs = CATS.map(c => ({ v: S.alloc[c.key], cor: c.cor, key: c.key }))
+    .concat([{ v: subtotal() * S.reserva, cor: COR_RESERVA, key: '__reserva__' }]);
+  segs.forEach(s => {
+    const f = s.v / T;
+    if (f > 0.004) {
+      parts += '<circle data-seg="' + s.key + '" r="' + R + '" cx="70" cy="70" fill="none" stroke="' + s.cor + '" stroke-width="20" ' +
+        'stroke-dasharray="' + (f * C - 2) + ' ' + (C - f * C + 2) + '" ' +
+        'stroke-dashoffset="' + (-off * C) + '" transform="rotate(-90 70 70)"></circle>';
+    }
+    off += f;
+  });
+  svg.innerHTML = parts;
+  document.getElementById('painel-donut-center').textContent = fmtK(T);
+}
+/* Legenda interativa: hover destaca o segmento, clique leva à categoria */
+function highlightSeg(key) {
+  document.querySelectorAll('[data-seg]').forEach(el => {
+    el.style.opacity = (!key || el.dataset.seg === key) ? '1' : '.22';
+  });
+  document.querySelectorAll('.pl-item').forEach(el => {
+    el.style.opacity = (!key || el.dataset.cat === key) ? '1' : '.45';
+  });
+}
+function renderLegend() {
+  const box = document.getElementById('painel-legend');
+  if (!box) return;
+  const itens = CATS.map(c => ({ key: c.key, nome: c.nome, cor: c.cor, v: S.alloc[c.key] }))
+    .concat([{ key: '__reserva__', nome: 'Reserva', cor: COR_RESERVA, v: Math.round(subtotal() * S.reserva) }]);
+  box.innerHTML = itens.map(i =>
+    '<button type="button" class="pl-item" data-cat="' + i.key + '">' +
+    '<span class="pl-swatch" style="background:' + i.cor + '"></span>' + i.nome +
+    ' <span class="pl-val">' + fmtK(i.v) + '</span></button>').join('');
+  box.querySelectorAll('.pl-item').forEach(el => {
+    el.addEventListener('mouseenter', () => highlightSeg(el.dataset.cat));
+    el.addEventListener('mouseleave', () => highlightSeg(null));
+    el.addEventListener('click', () => {
+      const alvo = el.dataset.cat === '__reserva__'
+        ? document.querySelector('.reserva-row')
+        : document.querySelector('.alloc-row[data-cat="' + el.dataset.cat + '"]');
+      if (alvo) {
+        alvo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        alvo.style.borderColor = 'var(--accent)';
+        setTimeout(() => { alvo.style.borderColor = ''; }, 1200);
+      }
+    });
+  });
+}
+
+function applyView() {
+  document.getElementById('painel-comp').style.display = viewDonut ? 'none' : 'flex';
+  document.getElementById('painel-donut-wrap').style.display = viewDonut ? 'block' : 'none';
+  document.getElementById('painel-legend').style.display = viewDonut ? 'grid' : 'none';
+  pvBtn.innerHTML = viewDonut ? ICON_BAR : ICON_PIE;
+  if (viewDonut) renderDonut();
+}
+pvBtn.addEventListener('click', () => {
+  viewDonut = !viewDonut;
+  applyView();
+  track('budget_view_toggle', { donut: viewDonut });
+});
+applyView();
+
+/* Recalcula painel, reserva e espaço sugerido (sem reconstruir as linhas) */
+function updateTotals() {
+  computeAlloc();
+  const rv = document.getElementById('reserva-value');
+  if (rv) rv.innerHTML = fmt(subtotal() * S.reserva) + '<small>' + Math.round(S.reserva * 100) + '%</small>';
+  renderPainel();
+  renderVenue();
+}
+
+function renderVenue() {
+  const box = document.getElementById('venue-box');
+  if (box.dataset.done) return;
+  box.dataset.done = '1';
+  box.innerHTML =
+    '<div class="venue-match">' +
+    '<span class="venue-match-label">Próximo passo</span>' +
+    '<div class="venue-match-name serif">Transforme esse plano em evento.</div>' +
+    '<p class="venue-match-desc">Fale com um especialista em eventos corporativos do Exc: validamos o seu plano, indicamos os fornecedores certos em cada faixa e encontramos a data e o espaço ideais.</p>' +
+    '<a class="btn-dark" id="venue-cta" href="' + contatoURL() + '">Falar com um especialista</a>' +
+    '</div>';
+  document.getElementById('venue-cta').addEventListener('click', () =>
+    track('budget_cta_consultoria', { orcamento: S.orcamento, plano: planoTotal(), tipo: S.tipo }));
+}
+
+function renderResult() {
+  computeAlloc();
+  renderRows();
+  fillEventoCard();
+  updateTotals();
+}
+
+/* ---------- CARD SEU EVENTO (respostas editáveis) ---------- */
+const evConv = document.getElementById('ev-conv');
+const evOrc = document.getElementById('ev-orc');
+function fillEventoCard() {
+  evConv.value = S.convidados;
+  evOrc.value = S.orcamento;
+}
+function refreshAllCards() {
+  computeAlloc();
+  document.querySelectorAll('.alloc-row[data-cat]').forEach(row => {
+    const cat = CATS.find(x => x.key === row.dataset.cat);
+    if (cat) updateCard(row, cat);
+  });
+  updateTotals();
+}
+evConv.addEventListener('input', () => {
+  const v = Math.max(20, Math.min(1000, +evConv.value || 20));
+  S.convidados = v;
+  refreshAllCards();
+});
+evConv.addEventListener('change', () => {
+  evConv.value = S.convidados;
+  track('budget_edit_answers', { campo: 'convidados', valor: S.convidados });
+});
+evOrc.addEventListener('input', () => {
+  const v = Math.max(20000, Math.min(2000000, +evOrc.value || 20000));
+  S.orcamento = v;
+  updateTotals();
+});
+evOrc.addEventListener('change', () => {
+  evOrc.value = S.orcamento;
+  track('budget_edit_answers', { campo: 'orcamento', valor: S.orcamento });
+});
+
+/* ---------- GATE OBRIGATÓRIO ANTES DO RESULTADO ---------- */
+function normalizeWhatsapp(value) {
+  const digits = (value || '').replace(/\D/g, '');
+  if (digits.length === 10 || digits.length === 11) return '55' + digits;
+  return digits;
+}
+document.getElementById('result-gate-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  const whatsapp = normalizeWhatsapp(data.whatsapp);
+  const error = document.getElementById('result-gate-error');
+  const button = e.target.querySelector('button[type="submit"]');
+  if (whatsapp.length < 12 || whatsapp.length > 13) {
+    error.textContent = 'Digite um WhatsApp válido, com DDD.';
+    return;
+  }
+  error.textContent = '';
+  button.disabled = true;
+  button.textContent = 'Liberando seu plano…';
+  const payload = Object.assign({
+    tool: 'planejador_orcamento', fonte: 'calculadora_qcme_corporativo', segmento: 'Corporativo', tipo: S.tipo, padrao: S.padrao && S.padrao.key, convidados: S.convidados,
+    orcamento: S.orcamento, custo_estimado: planoTotal(), reserva_pct: Math.round(S.reserva * 100),
+    vezes_calculou: vezesCalculou() + 1, whatsapp_e164: whatsapp, url_origem: location.href,
+    alocacao: JSON.stringify(S.alloc),
+    padroes_categoria: JSON.stringify(Object.fromEntries(CATS.map(c => [c.key, TIERS[tierOf(c)].key]))),
+  }, data, getUTMs());
+  try {
+    if (EXCCO.FORM_ENDPOINT) {
+      const response = await fetch(EXCCO.FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      if (!response.ok) throw new Error('Falha ao salvar contato');
+    }
+    sessionStorage.setItem('qcme_nome', (data.nome || '').trim());
+    sessionStorage.setItem('qcme_email', (data.email || '').trim().toLowerCase());
+    sessionStorage.setItem('qcme_result_unlocked', '1');
+    if (window.posthog && data.email) posthog.identify(data.email.trim().toLowerCase(), { name: data.nome.trim(), tipo: S.tipo });
+    track('budget_email_capture', { tipo: S.tipo, orcamento: S.orcamento });
+    window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'calc_lead', versao:'corporativo', lead:{
+      nome:(data.nome||'').trim(), email:(data.email||'').trim().toLowerCase(), whatsapp_e164:whatsapp,
+      tipo:S.tipo, convidados:S.convidados, orcamento:S.orcamento, custo_estimado:planoTotal(), fonte:'calculadora_qcme_corporativo'
+    }});
+    showUnlockedResult();
+  } catch (err) {
+    console.error('[result-gate]', err);
+    error.textContent = 'Não conseguimos liberar agora. Confira os dados e tente novamente.';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Ver meu resultado';
+  }
+});
+
+document.getElementById('btn-download-plan').addEventListener('click', () => {
+  gerarPDFPlano((sessionStorage.getItem('qcme_nome') || '').trim());
+  track('budget_pdf_download', { tipo: S.tipo });
+});
+
+/* ---------- PDF DO PLANO (gerado no navegador) ---------- */
+const EXC_LOGO_PNG = 'data:image/png;base64,' + EXC_LOGO_B64;
+const EXC_BRAND = { magenta: [210, 80, 240], cyan: [30, 220, 240], green: [80, 220, 100], yellow: [250, 220, 90], black: [20, 20, 20] };
+const hexToRgb = h => { const n = parseInt(h.replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+
+/* ---------- PDF DO PLANO (gerado no navegador, sem depender de e-mail) ---------- */
+function gerarPDFPlano(nome) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+  const M = 48; const W = doc.internal.pageSize.getWidth() - M * 2;
+  const PW = doc.internal.pageSize.getWidth();
+
+  /* header: faixa preta + mark (em placa branca, pro "E"/"C" preto do logo aparecer) + 4 pontos de cor */
+  doc.setFillColor(...EXC_BRAND.black); doc.rect(0, 0, PW, 92, 'F');
+  doc.setFillColor(255, 255, 255); doc.roundedRect(M, 24, 44, 44, 8, 8, 'F');
+  try { doc.addImage(EXC_LOGO_PNG, 'PNG', M + 5, 29, 34, 34); } catch (e) {}
+  doc.setTextColor(255); doc.setFont('helvetica', 'bold'); doc.setFontSize(18);
+  doc.text('Quanto Custa Meu Evento', M + 58, 44);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(200);
+  doc.text('Plano de custos do evento corporativo', M + 58, 62);
+  const dotY = 78, dotR = 3.2, dotGap = 14;
+  [EXC_BRAND.magenta, EXC_BRAND.cyan, EXC_BRAND.green, EXC_BRAND.yellow].forEach((c, i) => {
+    doc.setFillColor(...c); doc.circle(M + 58 + i * dotGap, dotY, dotR, 'F');
+  });
+
+  let y = 130;
+  doc.setTextColor(20);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+  const resumo = [
+    ['Tipo de evento', S.tipo || '—'],
+    ['Participantes', S.convidados.toLocaleString('pt-BR')],
+    ['Padrão', padraoLabel() || '—'],
+    ['Verba informada', fmt(S.orcamento)],
+  ];
+  resumo.forEach(([k, v]) => {
+    doc.setTextColor(110); doc.text(k, M, y);
+    doc.setTextColor(20); doc.setFont('helvetica', 'bold'); doc.text(String(v), M + 160, y);
+    doc.setFont('helvetica', 'normal'); y += 18;
+  });
+  y += 12;
+
+  /* caixa de destaque: total estimado */
+  doc.setFillColor(232, 241, 232); doc.roundedRect(M, y, W, 42, 6, 6, 'F');
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(46, 107, 62);
+  doc.text('Total estimado', M + 16, y + 26);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(17);
+  doc.text(fmt(planoTotal()), M + W - 16, y + 27, { align: 'right' });
+  y += 66;
+
+  doc.setDrawColor(230); doc.line(M, y, M + W, y); y += 26;
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(20);
+  doc.text('Distribuição por categoria', M, y); y += 22;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5);
+  CATS.forEach(c => {
+    const t = tierOf(c);
+    doc.setFillColor(...hexToRgb(c.cor)); doc.circle(M + 4, y - 4, 4, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setTextColor(20); doc.text(c.nome, M + 16, y);
+    doc.setFont('helvetica', 'normal'); doc.text(fmt(S.alloc[c.key]) + '  (' + TIERS[t].nome + ')', M + W, y, { align: 'right' });
+    y += 15;
+    doc.setTextColor(130); doc.setFontSize(9);
+    doc.text('faixa ' + TIERS[t].nome + ': ' + fmt(c.cuts[t]) + ' a ' + fmt(c.cuts[t + 1]) + ' por participante', M + 16, y);
+    doc.setFontSize(10.5); y += 19;
+    if (y > 730) { doc.addPage(); y = 64; }
+  });
+  doc.setFont('helvetica', 'bold'); doc.setTextColor(20); doc.text('Reserva de contingência', M + 16, y);
+  doc.setFont('helvetica', 'normal'); doc.text(fmt(subtotal() * S.reserva) + '  (' + Math.round(S.reserva * 100) + '%)', M + W, y, { align: 'right' });
+  y += 34;
+
+  doc.setDrawColor(230); doc.line(M, y, M + W, y); y += 26;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(20);
+  doc.text('Próximo passo', M, y); y += 18;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(60);
+  const linhas = doc.splitTextToSize('Fale com um especialista em eventos do Exc: validamos o seu plano, indicamos os fornecedores certos em cada faixa e encontramos a data ideal.', W);
+  doc.text(linhas, M, y); y += linhas.length * 14 + 14;
+
+  /* link clicável */
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5); doc.setTextColor(...hexToRgb('#2FA35C'));
+  doc.textWithLink('Falar com um especialista', M, y, { url: contatoURL() });
+  y += 30;
+
+  /* rodapé: faixa de cor + texto legal */
+  const pageH = doc.internal.pageSize.getHeight();
+  const stripeW = W / 4;
+  [EXC_BRAND.magenta, EXC_BRAND.cyan, EXC_BRAND.green, EXC_BRAND.yellow].forEach((c, i) => {
+    doc.setFillColor(...c); doc.rect(M + i * stripeW, pageH - 40, stripeW, 3, 'F');
+  });
+  doc.setFontSize(8); doc.setTextColor(140);
+  doc.text('Faixas calibradas com orçamentos reais de eventos realizados (jul/2026). Valores são um auxílio de planejamento e podem variar.', M, pageH - 24);
+
+  doc.save('plano-evento-corporativo.pdf');
+}
+
+var _bdn=document.getElementById('btn-baixar-de-novo'); if(_bdn) _bdn.addEventListener('click', function(){ gerarPDFPlano(); });
+
+/* ---------- REFAZER ---------- */
+document.getElementById('btn-refazer').addEventListener('click', () => {
+  S._hoverKey = null;
+  S.padrao = null;
+  S.pp = {};
+  S.reserva = RESERVA_PADRAO;
+  renderPadroes();
+  goTo('step-tipo');
+});
+</script>
+<script src="/quantocustameuevento/js/qcme-perguntas.js"></script>
+</body>
+</html>
